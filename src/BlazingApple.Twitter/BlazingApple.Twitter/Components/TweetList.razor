@@ -1,0 +1,7 @@
+﻿@using BlazingApple.Twitter.Models
+@if(Tweets is not null) {
+    @foreach(Tweet tweet in Tweets)
+    {
+        <TweetDisplay Tweet="tweet"></TweetDisplay>
+    }
+}

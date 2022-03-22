@@ -1,0 +1,52 @@
+﻿@using BlazingApple.Twitter.Models
+@using BlazingApple.Components
+
+@if (Tweet is not null)
+{
+	<div class="og-card" style="border-radius: 0.25rem !important; border: none; padding: 1rem;">
+		<div class="d-flex">
+			<BrowserLink class="mr-1" href="@($"https://twitter.com/{Tweet.Author!.UserName}")">
+				<img class="img-fluid" style="border-radius:50%; box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);" src="@Tweet.Author!.ProfileImageUrl" />
+			</BrowserLink>
+			<div class="d-flex flex-column">
+				<BrowserLink href="@($"https://twitter.com/{Tweet.Author!.UserName}")">@Tweet.Author!.DisplayName</BrowserLink>
+				<span class="text-muted">@($"@{Tweet.Author!.UserName}")</span>
+			</div>
+		</div>
+		<p>@Tweet.Text</p>
+
+		@if (Tweet.Media is not null)
+		{
+			@foreach (TweetAttachment media in Tweet.Media)
+			{
+				@if (media.Type == "photo")
+				{
+					<BrowserLink href="@Tweet.Url" style="display:contents;">
+						<img src="@media.Url" />
+					</BrowserLink>
+				}
+			}
+		}
+		<div class="text-muted">
+			<BrowserLink href="@Tweet.Url">@Tweet.CreatedAt.ToString("MMM \\'yy h:mm tt")</BrowserLink>
+		</div>
+
+		@if (Tweet.Metrics is not null)
+		{
+			<div class="d-flex" style="justify-content: space-between">
+				@if (Tweet.Metrics.RetweetCount > 0)
+				{
+					<span class="mr-1">@Tweet.Metrics.RetweetCount <span class="text-muted">Retweets</span></span>
+				}
+				@if (Tweet.Metrics.LikeCount > 0)
+				{
+					<span class="mr-1">@Tweet.Metrics.LikeCount <span class="text-muted">Likes</span></span>
+				}
+				@if (Tweet.Metrics.ReplyCount > 0)
+				{
+					<span class="mr-1">@Tweet.Metrics.ReplyCount <span class="text-muted">Replies</span></span>
+				}
+			</div>
+		}
+	</div>
+}
