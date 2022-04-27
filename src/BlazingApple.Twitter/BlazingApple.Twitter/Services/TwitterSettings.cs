@@ -13,7 +13,7 @@ public class TwitterSettings
     /// <summary>Bearer token for requests to the API.</summary>
     public string? BearerToken { get; set; }
 
-    /// <summary>The publi api key.</summary>
+    /// <summary>The public api key.</summary>
     public string? Key { get; set; }
 
     /// <summary>The private secret.</summary>

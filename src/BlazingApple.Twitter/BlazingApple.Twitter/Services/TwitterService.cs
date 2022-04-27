@@ -16,7 +16,7 @@ public sealed class TwitterService
     private const string _baseAddress = "https://api.twitter.com/2/";
     private const string _defaultTwitterError = "Null data from twitter";
     private readonly HttpClient _httpClient;
-
+    private DateTime _lastPurge;
     private Dictionary<string, Tweets> _tweetCache;
 
     /// <summary>DI Constructor.</summary>
@@ -27,6 +27,7 @@ public sealed class TwitterService
         _httpClient.BaseAddress = new Uri(_baseAddress);
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
         _tweetCache = new Dictionary<string, Tweets>();
+        _lastPurge = DateTime.Now;
     }
 
     /// <summary>Get the recent tweets for a user.</summary>
@@ -56,12 +57,13 @@ public sealed class TwitterService
     /// <returns>The tweets for the list.</returns>
     public async Task<IEnumerable<Tweet>> GetTweetsFromList(string listId, int? maxCount = null)
     {
+        RemoveStaleDataFromCache();
         return await TryGetListFromCache(listId, maxCount);
     }
 
     private static string GetQueryStringParams()
     {
-        string returnVal = "tweet.fields=created_at,author_id,public_metrics,attachments"
+        string returnVal = "tweet.fields=created_at,author_id,public_metrics,attachments,entities"
             + "&expansions=attachments.media_keys"
             + "&media.fields=duration_ms,height,media_key,preview_image_url,public_metrics,type,url,width,alt_text"
             + "&user.fields=profile_image_url";
@@ -104,11 +106,34 @@ public sealed class TwitterService
         }
     }
 
+    private bool IsStale(Tweets tweets)
+        => tweets.CreatedAt < DateTime.Now - TimeSpan.FromMinutes(2);
+
+    private void RemoveStaleDataFromCache()
+    {
+        if (_lastPurge >= DateTime.Now - TimeSpan.FromMinutes(2))
+            return;
+        else
+            _lastPurge = DateTime.Now;
+
+        List<KeyValuePair<string, Tweets>> staleData = new();
+        foreach (KeyValuePair<string, Tweets> cacheVal in _tweetCache)
+        {
+            if (IsStale(cacheVal.Value))
+                staleData.Add(cacheVal);
+        }
+        foreach (KeyValuePair<string, Tweets> cacheVal in staleData)
+        {
+            if (_tweetCache.ContainsKey(cacheVal.Key))
+                _tweetCache.Remove(cacheVal.Key);
+        }
+    }
+
     private async Task<Tweets> TryGetListFromCache(string listId, int? maxCount = null)
     {
         if (_tweetCache.TryGetValue(listId, out Tweets? cache))
         {
-            if (cache is null || cache.CreatedAt < DateTime.Now - TimeSpan.FromMinutes(2))
+            if (cache is null || IsStale(cache))
             {
                 Tweets tweets = await GetFromListInternal(listId, maxCount);
                 AddToCache(listId, tweets);

@@ -1,7 +1,7 @@
 ﻿@using BlazingApple.Twitter.Models
 @using BlazingApple.Components
 
-@if (Tweet is not null)
+@if (Tweet is not null && _tweetMarkupText is not null)
 {
 	<div class="og-card" style="border-radius: 0.25rem !important; border: none; padding: 1rem;">
 		<div class="d-flex">
@@ -13,7 +13,7 @@
 				<span class="text-muted">@($"@{Tweet.Author!.UserName}")</span>
 			</div>
 		</div>
-		<p>@Tweet.Text</p>
+		<p>@((MarkupString)_tweetMarkupText)</p>
 
 		@if (Tweet.Media is not null)
 		{

@@ -25,6 +25,10 @@ public class Tweet
     [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; }
 
+    /// <inheritdoc cref="Entities" />
+    [JsonPropertyName("entities")]
+    public EntityObjects? Entities { get; set; }
+
     /// <summary>The id for the tweet.</summary>
     public string? Id { get; set; }
 
