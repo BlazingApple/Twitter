@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<Description>BlazingApple is a collection of business objects and corresponding components to speed application development. BlazingApple.Components provides a set of core components to easily create beautiful applications</Description>
 		<Authors>Taylor White</Authors>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -10,9 +11,9 @@
 		<RepositoryUrl>https://github.com/BlazingApple/Twitter</RepositoryUrl>
 		<Copyright>2022 Blazing Apple</Copyright>
 		<PackageProjectUrl>https://github.com/BlazingApple/Twitter</PackageProjectUrl>
-		<AssemblyVersion>1.1</AssemblyVersion>
-		<FileVersion>1.1</FileVersion>
-		<Version>1.1</Version>
+		<AssemblyVersion>1.2.2</AssemblyVersion>
+		<FileVersion>1.2.2</FileVersion>
+		<Version>1.2.2</Version>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -36,7 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BlazingApple.Components" Version="1.0.3.17" />
+		<PackageReference Include="BlazingApple.Components" Version="1.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 	</ItemGroup>

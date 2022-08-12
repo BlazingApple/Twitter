@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazingApple.Twitter.Models.Entities
 {
+    /// <summary>A twitter url.</summary>
     public class Url : EntityBase
     {
         /// <summary>The details of the link.</summary>

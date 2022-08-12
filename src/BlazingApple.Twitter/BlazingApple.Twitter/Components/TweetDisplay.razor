@@ -1,5 +1,6 @@
 ﻿@using BlazingApple.Twitter.Models
 @using BlazingApple.Components
+@using BlazingApple.Components.Lists
 
 @if (Tweet is not null && _tweetMarkupText is not null)
 {
@@ -17,15 +18,9 @@
 
 		@if (Tweet.Media is not null)
 		{
-			@foreach (TweetAttachment media in Tweet.Media)
-			{
-				@if (media.Type == "photo")
-				{
-					<BrowserLink href="@Tweet.Url" style="display:contents;">
-						<img src="@media.Url" />
-					</BrowserLink>
-				}
-			}
+			<Carousel ElementId="@Tweet.Id" HideNavButtons="true" HideIndicatorButtons="true" Context="media" Items="Tweet.Media">
+				<img src="@media.Url" class="img-fluid" />
+			</Carousel>
 		}
 		<div class="text-muted">
 			<BrowserLink href="@Tweet.Url">@Tweet.CreatedAt.ToString("MMM \\'yy h:mm tt")</BrowserLink>
