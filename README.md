@@ -5,6 +5,8 @@
 This front-end Razor Class Library is intended to be used by Blazor WASM projects, and targets .NET 6.
 
 # Demo :video_camera:
+:zap: [Visit the demo site here](https://blazingapple.github.io/Twitter/).
+
 <img alt="Demo of BlazingApple.Twitter" src="https://github.com/BlazingApple/Survey/blob/main/README/BlazingApplesDemo.gif?raw=true" style="max-width:1000px;">
 
 # Installation :wrench:
