@@ -8,6 +8,9 @@
 /examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Client/obj
 /examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Server/obj
 /examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Shared/obj
+/examples/BlazingAppleConsumer.TwitterServerless/BlazingAppleConsumer.TwitterServerless/bin/*
+/examples/BlazingAppleConsumer.TwitterServerless/BlazingAppleConsumer.TwitterServerless/obj/*
+/examples/BlazingAppleConsumer.TwitterServerless/.vs/*
 /src/BlazingApple.Twitter/BlazingApple.Twitter/obj
 examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Client/bin/*
 examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Client/wwwroot/lib/*

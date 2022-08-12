@@ -1,0 +1,35 @@
+﻿@page "/"
+
+<PageTitle>Welcome to BlazingApple's Twitter Package</PageTitle>
+
+<div style="position:sticky; top:0px; background-color:white;" class="my-2">
+    <EditForm Model="@(new {})" OnValidSubmit="GetTweets">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="name">Twitter Username</label>
+                    <InputText id="name" class="form-control" @bind-Value="@TwitterUserName"></InputText>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="list">Twitter List Id <small class="text-muted">(1320814865225863172)</small></label>
+                    <InputText id="list" class="form-control" @bind-Value="@ListId"></InputText>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <button class="btn btn-primary" type="submit">Get tweets</button>
+            </div>
+        </div>
+    </EditForm>
+    <hr />
+</div>
+@if (_tweets is not null)
+{
+    <div class="my-2">
+        <BlazingApple.Twitter.Components.TweetList Tweets="_tweets" />
+    </div>
+}
