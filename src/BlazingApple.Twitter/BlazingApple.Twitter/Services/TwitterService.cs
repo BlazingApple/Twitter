@@ -16,8 +16,8 @@ public sealed class TwitterService
     private const string _baseAddress = "https://api.twitter.com/2/";
     private const string _defaultTwitterError = "Null data from twitter";
     private readonly HttpClient _httpClient;
+    private readonly Dictionary<string, Tweets> _tweetCache;
     private DateTime _lastPurge;
-    private Dictionary<string, Tweets> _tweetCache;
 
     /// <summary>DI Constructor.</summary>
     public TwitterService(IConfiguration config, HttpClient httpClient)
@@ -70,6 +70,9 @@ public sealed class TwitterService
         return returnVal;
     }
 
+    private static bool IsStale(Tweets tweets)
+        => tweets.CreatedAt < DateTime.Now - TimeSpan.FromMinutes(2);
+
     private Tweets AddToCache(string id, Tweets tweets)
     {
         if (_tweetCache.ContainsKey(id))
@@ -105,9 +108,6 @@ public sealed class TwitterService
             throw new InvalidOperationException(_defaultTwitterError);
         }
     }
-
-    private bool IsStale(Tweets tweets)
-        => tweets.CreatedAt < DateTime.Now - TimeSpan.FromMinutes(2);
 
     private void RemoveStaleDataFromCache()
     {
