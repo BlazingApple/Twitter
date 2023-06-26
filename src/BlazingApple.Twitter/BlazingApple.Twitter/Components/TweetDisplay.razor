@@ -16,9 +16,9 @@
 		</div>
 		<p>@((MarkupString)_tweetMarkupText)</p>
 
-		@if (Tweet.Media is not null)
+		@if (Tweet.Media is not null && Tweet.Media.Count > 0)
 		{
-			<Carousel ElementId="@Tweet.Id" HideNavButtons="true" HideIndicatorButtons="true" Context="media" Items="Tweet.Media">
+			<Carousel ElementId="@($"tweet-{Tweet.Id}")" HideNavButtons="true" HideIndicatorButtons="true" Context="media" Items="Tweet.Media">
 				<img src="@media.Url" class="img-fluid" />
 			</Carousel>
 		}

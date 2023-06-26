@@ -11,9 +11,9 @@
 		<RepositoryUrl>https://github.com/BlazingApple/Twitter</RepositoryUrl>
 		<Copyright>2022 Blazing Apple</Copyright>
 		<PackageProjectUrl>https://github.com/BlazingApple/Twitter</PackageProjectUrl>
-		<AssemblyVersion>1.2.2</AssemblyVersion>
-		<FileVersion>1.2.2</FileVersion>
-		<Version>1.2.2</Version>
+		<AssemblyVersion>1.2.5</AssemblyVersion>
+		<FileVersion>1.2.5</FileVersion>
+		<Version>1.2.5</Version>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -37,7 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BlazingApple.Components" Version="1.5.0" />
+		<PackageReference Include="BlazingApple.Components" Version="2.0.7.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 	</ItemGroup>

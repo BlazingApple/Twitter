@@ -16,3 +16,4 @@ examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Client/bin/*
 examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Client/wwwroot/lib/*
 examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Shared/bin/*
 examples/BlazingAppleConsumer.Twitter/BlazingAppleConsumer.Twitter/Server/bin/*
+/src/BlazingApple.Twitter/.vs/*
