@@ -1,4 +1,5 @@
-﻿using BlazingApple.Twitter.Models;
+﻿using BlazingApple.Twitter.Components;
+using BlazingApple.Twitter.Models;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
@@ -8,6 +9,7 @@ namespace BlazingAppleConsumer.Twitter.Client.Pages
     public partial class Index : ComponentBase
     {
         private IEnumerable<Tweet>? _tweets;
+        private TimelineType _selectedTimelineType;
 
         /// <inheritdoc cref="HttpClient" />
         [Inject]
@@ -16,6 +18,10 @@ namespace BlazingAppleConsumer.Twitter.Client.Pages
         /// <summary>The twitter list to show. Required, if the twitter user is not provided.</summary>
         [Parameter]
         public string? ListId { get; set; }
+
+        /// <summary>The twitter list to show. Required, if the twitter user is not provided.</summary>
+        [Parameter]
+        public string? TwitterId { get; set; }
 
         /// <summary>The twitter user name, required if List is not provided.</summary>
         [Parameter]
@@ -31,9 +37,13 @@ namespace BlazingAppleConsumer.Twitter.Client.Pages
         private async Task GetTweets()
         {
             if (ListId != null)
+            {
                 _tweets = await Http.GetFromJsonAsync<IEnumerable<Tweet>>($"api/twitter/?listId={ListId}");
+            }
             else if (TwitterUserName != null)
+            {
                 _tweets = await Http.GetFromJsonAsync<IEnumerable<Tweet>>($"api/twitter/?username={TwitterUserName}");
+            }
         }
     }
 }

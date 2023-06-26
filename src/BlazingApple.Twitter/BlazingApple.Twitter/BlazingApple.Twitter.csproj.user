@@ -3,4 +3,9 @@
   <PropertyGroup>
     <_LastSelectedProfileId>C:\Users\white\Documents\Code Projects\BlazingApple\Twitter\src\BlazingApple.Twitter\BlazingApple.Twitter\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\scripts\blazingAppleTwitter.js">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
 </Project>

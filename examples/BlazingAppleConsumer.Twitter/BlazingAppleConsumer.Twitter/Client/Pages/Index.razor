@@ -1,18 +1,37 @@
 ﻿@page "/"
+@using BlazingApple.Twitter.Components
 
 <PageTitle>BlazingApple - Twitter</PageTitle>
 
 <div style="position:sticky; top:0px; background-color:white;" class="my-2">
     <EditForm Model="@(new {})" OnValidSubmit="GetTweets">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="name"></label>
+                    <InputRadioGroup @bind-Value="_selectedTimelineType">
+                        @foreach (TimelineType timelineType in Enum.GetValues<TimelineType>())
+                        {
+                            <label>
+                                <InputRadio Value="@timelineType" />
+                                <text>&nbsp;</text>@timelineType
+                            </label>
+                        }
+                    </InputRadioGroup>
+                </div>
+                <div class="form-group">
+                    <label for="twitterId">Embedded List Id</label>
+                    <InputText id="twitterId" class="form-control" @bind-Value="@TwitterId"></InputText>
+                </div>
+            </div>
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="name">Twitter Username</label>
                     <InputText id="name" class="form-control" @bind-Value="@TwitterUserName"></InputText>
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="list">Twitter List Id <small class="text-muted">(1320814865225863172)</small></label>
                     <InputText id="list" class="form-control" @bind-Value="@ListId"></InputText>
@@ -27,9 +46,18 @@
     </EditForm>
     <hr />
 </div>
-@if (_tweets is not null)
-{
-    <div class="my-2">
-        <BlazingApple.Twitter.Components.TweetList Tweets="_tweets" />
+<div class="row">
+    <div class="col-lg-6">
+        <label>Twitter Embed Render</label>
+        <TweetList TimelineType="@_selectedTimelineType" TwitterId="@TwitterId" />
     </div>
-}
+    <div class="col-lg-6">
+        <label>Twitter API Render</label>
+        @if (_tweets is not null)
+        {
+            <div class="my-2">
+                <TweetList Tweets="_tweets" />
+            </div>
+        }
+    </div>
+</div>
