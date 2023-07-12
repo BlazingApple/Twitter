@@ -1,7 +1,7 @@
 ﻿@using BlazingApple.Twitter.Models
 @if (TwitterId is not null)
 {
-    <TwitterHostedList Id="@TwitterId" @ref="_embeddedList" Type="TimelineType"/>
+    <TwitterHostedList Id="@TwitterId" @ref="_embeddedList" Type="TimelineType" HeightInPixels="HeightInPixels" MaxCount="MaxCount"/>
 }
 else if(Tweets is not null)
 {

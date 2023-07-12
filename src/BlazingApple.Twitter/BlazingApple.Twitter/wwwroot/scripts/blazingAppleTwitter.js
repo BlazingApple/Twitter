@@ -1,24 +1,24 @@
-﻿async function createListTimeline(elementId, listId)
+﻿async function createListTimeline(elementId, listId, heightInPixels, maxTweetCount)
 {
 	var dataSource = {
 		sourceType: 'list',
 		id: listId
 	};
 
-	await createTimeline(elementId, dataSource);
+	await createTimeline(elementId, dataSource, heightInPixels, maxTweetCount);
 }
 
-function createProfileTimeline(elementId, userName)
+function createProfileTimeline(elementId, userName, heightInPixels, maxTweetCount)
 {
 	var dataSource = {
 		sourceType: 'profile',
 		screenName: userName
 	};
 
-	createTimeline(elementId, dataSource);
+	createTimeline(elementId, dataSource, heightInPixels, maxTweetCount);
 }
 
-function createTimeline(elementId, dataSource)
+function createTimeline(elementId, dataSource, heightInPixels, maxTweetCount)
 {
 	(function ()
 	{
@@ -27,15 +27,28 @@ function createTimeline(elementId, dataSource)
 		// See https://dev.twitter.com/web/embedded-timelines/parameters
 		var options = {
 			chrome: 'noheader nofooter noscrollbar transparent noborders',
-			height: 800,
-			width: 500
 		};
+
+		if (heightInPixels)
+			options.height = heightInPixels;
+
+		if (maxTweetCount)
+			options.tweetLimit = maxTweetCount;
 
 		twttr.ready(function (twttr)
 		{
 			target.innerHTML = null;
 			twttr.widgets.createTimeline(dataSource, target, options);
 		});
+
+		if (!twttr.widgets || !target || !twttr.ready || !twttr.ready())
+		{
+			setTimeout(createTimeline, 250, target, dataSource, heightInPixels, maxTweetCount);
+		}
+		else
+		{
+			twttr.widgets.createTimeline(dataSource, target, options);
+		}
 	})();
 }
 
